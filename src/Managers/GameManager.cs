@@ -65,7 +65,7 @@ namespace boggleApp.Managers
                 RuntimeTimer.RegisterAppEnd();
 
                 var totalOperations = solver.GetTotalOperations();
-                PrintFoundWordsToConsole(foundWords, totalOperations);
+                PrintFoundWordsToConsole(foundWords, totalOperations, opts.ForceWriteFoundWords);
             });
 
 
@@ -73,9 +73,9 @@ namespace boggleApp.Managers
             return Utils.Consts.c_ExitCodeSuccess;
         }
 
-        private static void PrintFoundWordsToConsole(List<string> foundWords, long totalOperations)
+        private static void PrintFoundWordsToConsole(List<string> foundWords, long totalOperations, bool forceWriteFoundWords)
         {
-            if (foundWords.Count < 64)
+            if (foundWords.Count < 64 || forceWriteFoundWords)
             {
                 foreach (string word in foundWords)
                 {
