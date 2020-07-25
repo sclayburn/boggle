@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "boggleApp": {
+      "commandName": "Project",
+      "commandLineArgs": "game --sidelength=1024 --async"
+    }
+  }
+}

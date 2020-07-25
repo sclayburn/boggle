@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "boggleApp", "src\boggleApp.csproj", "{8A468F09-5217-4DA9-8CC1-04A50A6CAEB0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "boggleTests", "tests\boggleTests.csproj", "{02DA15B2-5EA4-4339-9607-E45FA5C9D59A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "boggleShared", "shared\boggleShared.csproj", "{188CCB40-F1C1-490E-9D35-86E8153CAF65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A468F09-5217-4DA9-8CC1-04A50A6CAEB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A468F09-5217-4DA9-8CC1-04A50A6CAEB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A468F09-5217-4DA9-8CC1-04A50A6CAEB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A468F09-5217-4DA9-8CC1-04A50A6CAEB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02DA15B2-5EA4-4339-9607-E45FA5C9D59A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02DA15B2-5EA4-4339-9607-E45FA5C9D59A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02DA15B2-5EA4-4339-9607-E45FA5C9D59A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02DA15B2-5EA4-4339-9607-E45FA5C9D59A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{188CCB40-F1C1-490E-9D35-86E8153CAF65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{188CCB40-F1C1-490E-9D35-86E8153CAF65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{188CCB40-F1C1-490E-9D35-86E8153CAF65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{188CCB40-F1C1-490E-9D35-86E8153CAF65}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F9868170-BF1B-45BC-90AE-A92C91D2DC11}
+	EndGlobalSection
+EndGlobal
