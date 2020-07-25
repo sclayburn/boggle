@@ -35,7 +35,7 @@ namespace boggleApp.Services
             var rootNode = dict.GetWordDictionary();
             var nodeArray = rootNode.Children;
             Task[] runningTasks = new Task[totalBoardSpaces];
-            var visitedQueue = new ConcurrentQueue<bool[]>();
+            var visitedQueue = new ConcurrentQueue<BitArray>();
 
             Log.Information(Utils.Consts.c_logAsyncCreatingTasks);
 
@@ -61,15 +61,15 @@ namespace boggleApp.Services
 
                         string str = chr.ToString();
 
-                        bool[] visited;
+                        BitArray visited;
                         if (!visitedQueue.TryDequeue(out visited))
                         {
-                            visited = new bool[totalBoardSpaces];
+                            visited = new BitArray(totalBoardSpaces);
                         }
 
                         RecursiveSearch(currentNode, chars, innerI, innerJ, visited, str, m_foundWords[index]);
 
-                        Array.Clear(visited, 0, visited.Length);
+                        visited.SetAll(false);
                         visitedQueue.Enqueue(visited);
                     });
                     runningTasks[index] = t;
@@ -116,7 +116,7 @@ namespace boggleApp.Services
             return returnVal.OrderBy(x => x).ToList();
         }
 
-        private void RecursiveSearch(TrieNode node, char[] chars, int i, int j, bool[] visited, string wordBuilder, List<string> foundWords)
+        private void RecursiveSearch(TrieNode node, char[] chars, int i, int j, BitArray visited, string wordBuilder, List<string> foundWords)
         {
             Interlocked.Increment(ref m_totalOperations);
             

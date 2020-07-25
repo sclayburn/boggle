@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Linq;
+using System.Collections;
 
 namespace boggleApp.Services
 {
@@ -26,7 +27,7 @@ namespace boggleApp.Services
             var chars = board.Chars;
             var rootNode = dict.GetWordDictionary();
             var nodeArray = rootNode.Children;
-            bool[] visited = new bool[m_sideLength * m_sideLength];
+            BitArray visited = new BitArray(m_sideLength * m_sideLength);
 
             for (int i = 0; i < m_sideLength; i++)
             {
@@ -45,7 +46,7 @@ namespace boggleApp.Services
 
                     string str = chr.ToString();
 
-                    Array.Clear(visited, 0, visited.Length);
+                    visited.SetAll(false);
 
                     RecursiveSearch(currentNode, chars, i, j, visited, str);
                 }
@@ -69,7 +70,7 @@ namespace boggleApp.Services
             return m_foundWords.OrderBy(x => x).ToList();
         }
 
-        private void RecursiveSearch(TrieNode node, char[] chars, int i, int j, bool[] visited, string wordBuilder)
+        private void RecursiveSearch(TrieNode node, char[] chars, int i, int j, BitArray visited, string wordBuilder)
         {
             m_totalOperations++;
 
@@ -130,11 +131,11 @@ namespace boggleApp.Services
 
         private bool IsValidSpace(int i, int j)
         {
-            if ((i < 0 || i >= m_sideLength) || (j < 0 || j >= m_sideLength))
+            if ((i >= 0 && i < m_sideLength) && (j >= 0 && j < m_sideLength))
             {
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
     }
 }
