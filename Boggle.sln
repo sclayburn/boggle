@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "boggleApp", "src\boggleApp.csproj", "{8A468F09-5217-4DA9-8CC1-04A50A6CAEB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boggle", "src\Boggle.csproj", "{8A468F09-5217-4DA9-8CC1-04A50A6CAEB0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "boggleTests", "tests\boggleTests.csproj", "{02DA15B2-5EA4-4339-9607-E45FA5C9D59A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boggle.Test", "test\Boggle.Test.csproj", "{02DA15B2-5EA4-4339-9607-E45FA5C9D59A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "boggleShared", "shared\boggleShared.csproj", "{188CCB40-F1C1-490E-9D35-86E8153CAF65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boggle.Shared", "shared\Boggle.Shared.csproj", "{188CCB40-F1C1-490E-9D35-86E8153CAF65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
