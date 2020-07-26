@@ -1,19 +1,13 @@
-﻿using boggleApp.Game;
-using boggleShared;
-using Microsoft.CSharp.RuntimeBinder;
+﻿using Boggle.Game;
+using BoggleShared;
 using Serilog;
-using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
-namespace boggleApp.Services
+namespace Boggle.Services
 {
     public class AsyncGameSolverService : IGameSolver
     {
@@ -36,6 +30,7 @@ namespace boggleApp.Services
             var nodeArray = rootNode.Children;
             Task[] runningTasks = new Task[totalBoardSpaces];
             var visitedQueue = new ConcurrentQueue<BitArray>();
+            long[] totalOperations = new long[totalBoardSpaces];
 
             Log.Information(Utils.Consts.c_logAsyncCreatingTasks);
 
@@ -67,7 +62,7 @@ namespace boggleApp.Services
                             visited = new BitArray(totalBoardSpaces);
                         }
 
-                        RecursiveSearch(currentNode, chars, innerI, innerJ, visited, str, m_foundWords[index]);
+                        RecursiveSearch(currentNode, chars, innerI, innerJ, visited, str, m_foundWords[index], ref totalOperations[index]);
 
                         visited.SetAll(false);
                         visitedQueue.Enqueue(visited);
@@ -78,7 +73,7 @@ namespace boggleApp.Services
 
             Log.Information(Utils.Consts.c_logAsyncTasksCreated, new object[] { runningTasks.Length });
 
-            foreach(var task in runningTasks)
+            foreach (var task in runningTasks)
             {
                 task.Start();
             }
@@ -86,6 +81,8 @@ namespace boggleApp.Services
             Log.Information(Utils.Consts.c_logAsyncWaitingToComplete);
 
             Task.WaitAll(runningTasks);
+
+            m_totalOperations = totalOperations.Sum();
 
             return GetFoundWords();
         }
@@ -116,10 +113,10 @@ namespace boggleApp.Services
             return returnVal.OrderBy(x => x).ToList();
         }
 
-        private void RecursiveSearch(TrieNode node, char[] chars, int i, int j, BitArray visited, string wordBuilder, List<string> foundWords)
+        private void RecursiveSearch(TrieNode node, char[] chars, int i, int j, BitArray visited, string wordBuilder, List<string> foundWords, ref long totalOperations)
         {
-            Interlocked.Increment(ref m_totalOperations);
-            
+            totalOperations++;
+
             //Ensure we are on a valid space
             if (!IsValidSpace(i, j))
             {
@@ -139,7 +136,7 @@ namespace boggleApp.Services
             {
                 return;
             }
-            visited[index] =  true;
+            visited[index] = true;
 
             for (int k = i - 1; k <= i + 1; k++)
             {
@@ -165,8 +162,8 @@ namespace boggleApp.Services
                         continue;
                     }
                     string nextWord = wordBuilder + chr;
-                    
-                    RecursiveSearch(innerNode, chars, k, l, visited, nextWord, foundWords);
+
+                    RecursiveSearch(innerNode, chars, k, l, visited, nextWord, foundWords, ref totalOperations);
                 }
             }
 
