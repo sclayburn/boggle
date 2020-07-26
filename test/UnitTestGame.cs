@@ -3,6 +3,7 @@ using Boggle.Services;
 using BoggleShared;
 using FluentAssertions;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace BoggleTests
@@ -51,6 +52,8 @@ namespace BoggleTests
 
         private void ValidateFoundWords(IEnumerable<string> foundWords)
         {
+            foundWords.Count().Should().Be(31);
+            
             foundWords.Should().Contain("abed");
             foundWords.Should().Contain("aero");
             foundWords.Should().Contain("aery");

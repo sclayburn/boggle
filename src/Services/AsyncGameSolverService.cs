@@ -103,10 +103,7 @@ namespace Boggle.Services
             {
                 foreach (var word in list)
                 {
-                    if (!returnVal.Contains(word))
-                    {
-                        returnVal.Add(word);
-                    }
+                    returnVal.Add(word);
                 }
             }
             // Not horribly performant but only called once on exit to alphabetically order the found words

@@ -80,10 +80,7 @@ namespace Boggle.Services
             // If we found a word, add it
             if (node.IsLeaf)
             {
-                if (!m_foundWords.Contains(wordBuilder))
-                {
-                    m_foundWords.Add(wordBuilder);
-                }
+                m_foundWords.Add(wordBuilder);
             }
 
             int index = (i * m_sideLength) + j;
