@@ -1,13 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using Boggle.Managers;
+using Boggle.Options;
+using BoggleShared;
 using CommandLine;
 using Serilog;
-using boggleApp.Utils;
-using boggleApp.Options;
-using boggleApp.Managers;
-using boggleShared;
+using System;
+using System.Threading.Tasks;
 
-namespace boggleApp
+namespace Boggle
 {
     class Program
     {
@@ -21,10 +20,10 @@ namespace boggleApp
 
             int exitCode = await Parser.Default.ParseArguments<CmdLineOptions, object>(args)
             .MapResult(
-                (CmdLineOptions opts) => GameManager.RunAndReturnExitCode(opts),
-                errs => Task.FromResult(Utils.Consts.c_ExitCodeFailure));
+                (CmdLineOptions opts) => GameManager.RunAndReturnExitCodeAsync(opts),
+                errs => Task.FromResult(Utils.Consts.c_exitCodeFailure));
 
-            Log.Information(Utils.Consts.c_logAppRuntime, new object[] { RuntimeTimer.CalcAppRuntimeMs() });
+            Log.Information(Utils.Consts.c_logAppRuntime, RuntimeTimer.CalcAppRuntimeMs());
 
             Log.CloseAndFlush();
 
@@ -33,12 +32,12 @@ namespace boggleApp
 
         private static void WriteCopyright()
         {
-            string copyrightYear = Utils.Consts.c_CopyrightYear.ToString();
-            if (DateTime.Now.Year > Utils.Consts.c_CopyrightYear)
+            string copyrightYear = Utils.Consts.c_copyrightYear.ToString();
+            if (DateTime.Now.Year > Utils.Consts.c_copyrightYear)
             {
                 copyrightYear += $"-{DateTime.Now.Year}";
             }
-            Log.Information(Utils.Consts.c_CopyrightFormat, new object[] {copyrightYear});
+            Log.Information(Utils.Consts.c_copyrightFormat, copyrightYear);
 
         }
     }

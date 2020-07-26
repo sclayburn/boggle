@@ -1,13 +1,10 @@
-﻿using boggleApp.Game;
-using boggleShared;
-using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Linq;
+﻿using Boggle.Game;
+using BoggleShared;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace boggleApp.Services
+namespace Boggle.Services
 {
     public class SinglethreadedGameSolverService : IGameSolver
     {
@@ -16,11 +13,11 @@ namespace boggleApp.Services
         private long m_totalOperations;
 
         /// <summary>
-        /// Solves the boggle board using a single thread
+        /// Solves the boggle board using a single thread.
         /// </summary>
-        /// <param name="dict">An IWordDict object that contains the dictionary to use when solving the board</param>
-        /// <param name="board">A Board that is already populated with character spaces</param>
-        public List<string> Solve(IWordDict dict, Board board)
+        /// <param name="dict">An <see cref="IWordDict"/> object that contains the dictionary to use when solving the board.</param>
+        /// <param name="board">A Board that is already populated with character spaces.</param>
+        public IEnumerable<string> Solve(IWordDict dict, Board board)
         {
             m_foundWords = new HashSet<string>();
             m_sideLength = board.SideLength;
@@ -38,7 +35,7 @@ namespace boggleApp.Services
                     int alphaIndex = chr - Consts.c_asciiCharCodeOfA;
                     var currentNode = nodeArray[alphaIndex];
 
-                    //Early out if we don't have any words that start with this character
+                    // Early out if we don't have any words that start with this character
                     if (currentNode == null)
                     {
                         continue;
@@ -51,36 +48,36 @@ namespace boggleApp.Services
                     RecursiveSearch(currentNode, chars, i, j, visited, str);
                 }
             }
-            
+
             return GetFoundWords();
         }
 
         /// <summary>
-        /// Gets the total number of iteration operations that were performed solving this board
+        /// Gets the total number of iteration operations that were performed solving this board.
         /// </summary>
-        /// <returns>A long with the total number of operations</returns>
+        /// <returns>A long with the total number of operations.</returns>
         public long GetTotalOperations()
         {
             return m_totalOperations;
         }
 
-        private List<string> GetFoundWords()
+        private IEnumerable<string> GetFoundWords()
         {
-            //Not horribly performant but only called once on exit to alphabetically order the found words
-            return m_foundWords.OrderBy(x => x).ToList();
+            // Not horribly performant but only called once on exit to alphabetically order the found words
+            return m_foundWords.OrderBy(x => x);
         }
 
         private void RecursiveSearch(TrieNode node, char[] chars, int i, int j, BitArray visited, string wordBuilder)
         {
             m_totalOperations++;
 
-            //Ensure we are on a valid space
+            // Ensure we are on a valid space
             if (!IsValidSpace(i, j))
             {
                 return;
             }
 
-            //If we found a word, add it
+            // If we found a word, add it
             if (node.IsLeaf)
             {
                 if (!m_foundWords.Contains(wordBuilder))
@@ -91,7 +88,7 @@ namespace boggleApp.Services
 
             int index = (i * m_sideLength) + j;
 
-            //Ensure we haven't visited this before
+            // Ensure we haven't visited this before
             if (visited[index])
             {
                 return;
@@ -112,9 +109,9 @@ namespace boggleApp.Services
                         continue;
                     }
 
-                    //Check to see if the char on the board exists in this node
+                    // Check to see if the char on the board exists in this node
                     char chr = chars[localIndex];
-                    
+
                     int nodeIndex = chr - Consts.c_asciiCharCodeOfA;
                     var innerNode = node.Children[nodeIndex];
                     if (innerNode == null)

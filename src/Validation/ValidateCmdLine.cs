@@ -1,22 +1,20 @@
-﻿using boggleApp.Options;
-using boggleApp.Utils;
+﻿using Boggle.Options;
+using Boggle.Utils;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace boggleApp.Validation
+namespace Boggle.Validation
 {
     public class ValidateCmdLine
     {
         /// <summary>
-        /// Ensure that the command line options are valid and within bounds
+        /// Ensure that the command line options are valid and within bounds.
         /// </summary>
-        /// <param name="opts">CmdLineOptions object that contains the parsed command line args</param>
+        /// <param name="opts">CmdLineOptions object that contains the parsed command line args.</param>
         public void IsCmdLineValid(CmdLineOptions opts)
         {
             if (opts == null)
             {
-                throw new ArgumentNullException(Consts.c_paramNameOpts);
+                throw new ArgumentNullException(nameof(opts));
             }
 
             IsSideLengthValid(opts.SideLength);
@@ -26,12 +24,12 @@ namespace boggleApp.Validation
         {
             if (length < 1)
             {
-                throw new ArgumentOutOfRangeException(Consts.c_paramNameSideLength, Consts.c_argExceptionDescSideLengthZero);
+                throw new ArgumentOutOfRangeException(nameof(length), Consts.c_argExceptionDescSideLengthZero);
             }
 
             if (length > 1024)
             {
-                throw new ArgumentOutOfRangeException(Consts.c_paramNameSideLength, Consts.c_argExceptionDescSideLengthLessThanMax);
+                throw new ArgumentOutOfRangeException(nameof(length), Consts.c_argExceptionDescSideLengthLessThanMax);
             }
         }
     }

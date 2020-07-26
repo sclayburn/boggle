@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using System.Linq;
 
-namespace boggleApp.Utils
+namespace Boggle.Utils
 {
     public static class PathHelper
     {
         /// <summary>
-        /// Search for and find the first path that contains the dictionary file
+        /// Search for and find the first path that contains the dictionary file.
         /// </summary>
-        /// <returns>Fully qualified local path to the dictionary file</returns>
+        /// <returns>Fully qualified local path to the dictionary file.</returns>
         public static string GetWordDictionaryPath()
         {
             string[] files = Directory.GetFiles(Consts.c_localDir, Consts.c_dictFilename, SearchOption.AllDirectories);

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BoggleShared;
 using System.Threading.Tasks;
-using System.IO;
-using boggleShared;
-using System.Linq;
 
-namespace boggleApp.Game
+namespace Boggle.Game
 {
     public interface IWordDict
     {
-        public Task LoadDictionaryFromDisk();
+        public Task LoadDictionaryFromDiskAsync();
         public TrieNode GetWordDictionary();
     }
 }

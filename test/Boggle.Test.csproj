@@ -4,6 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <RootNamespace>BoggleTest</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,8 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\shared\boggleShared.csproj" />
-    <ProjectReference Include="..\src\boggleApp.csproj" />
+    <ProjectReference Include="..\shared\Boggle.Shared.csproj" />
+    <ProjectReference Include="..\src\Boggle.csproj" />
   </ItemGroup>
 
 </Project>

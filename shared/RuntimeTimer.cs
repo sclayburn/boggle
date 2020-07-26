@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace boggleShared
+namespace BoggleShared
 {
     public static class RuntimeTimer
     {
@@ -10,7 +8,7 @@ namespace boggleShared
         private static DateTime m_appEnd;
 
         /// <summary>
-        /// Records the DateTime this application started on
+        /// Records the DateTime this application started on.
         /// </summary>
         public static void RegisterAppStart()
         {
@@ -18,7 +16,7 @@ namespace boggleShared
         }
 
         /// <summary>
-        /// Records the DateTime this application finished processing
+        /// Records the DateTime this application finished processing.
         /// </summary>
         public static void RegisterAppEnd()
         {
@@ -26,9 +24,9 @@ namespace boggleShared
         }
 
         /// <summary>
-        /// Calculates the total number of microseconds that the application took to execute
+        /// Calculates the total number of microseconds that the application took to execute.
         /// </summary>
-        /// <returns>Total number of microseconds</returns>
+        /// <returns>Total number of microseconds.</returns>
         public static double CalcAppRuntimeUs()
         {
             TimeSpan span = new TimeSpan(m_appEnd.Ticks - m_appStart.Ticks);
@@ -36,9 +34,9 @@ namespace boggleShared
         }
 
         /// <summary>
-        /// Calculates the total number of milliseconds that the application took to execute
+        /// Calculates the total number of milliseconds that the application took to execute.
         /// </summary>
-        /// <returns>Total number of milliseconds</returns>
+        /// <returns>Total number of milliseconds.</returns>
         public static double CalcAppRuntimeMs()
         {
             TimeSpan span = new TimeSpan(m_appEnd.Ticks - m_appStart.Ticks);

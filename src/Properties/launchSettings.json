@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "boggleApp": {
+    "Boggle": {
       "commandName": "Project",
       "commandLineArgs": "game --sidelength=8 --async --forcewritefoundwords"
     }

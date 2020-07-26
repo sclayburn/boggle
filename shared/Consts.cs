@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace boggleShared
+﻿namespace BoggleShared
 {
     public static class Consts
     {
-        public const string c_paramNameBoard = "board";
-        public const string c_paramNameSideLength = "sideLength";
-
         public const string c_argExceptionDescBoard = "Board array length must equal sideLength squared";
         public const string c_argExceptionDescSideLength = "SideLength must be between 1 and 1024";
 

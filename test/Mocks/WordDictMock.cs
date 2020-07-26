@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BoggleShared;
 using System.Threading.Tasks;
-using System.IO;
-using boggleApp.Utils;
-using boggleShared;
-using Serilog;
-using System.Linq;
 
-namespace boggleApp.Game
+namespace Boggle.Game
 {
     public class WordDictMock : IWordDict
     {
@@ -16,7 +9,7 @@ namespace boggleApp.Game
 
 
         /// <summary>
-        /// Returns the Word Dictionary trie
+        /// Returns the Word Dictionary trie.
         /// </summary>
         /// <returns>Root TrieNode of the prefix search tree that is storing the word dictionary.  Will be null until LoadDictionaryFromDisk is called.</returns>
         public TrieNode GetWordDictionary()
@@ -26,10 +19,10 @@ namespace boggleApp.Game
 
 
         /// <summary>
-        /// Populates the dictionary from a hard coded list of words
+        /// Populates the dictionary from a hard coded list of words.
         /// </summary>
         /// <returns>async Task for flow control.  Async is used for conformity purposes.</returns>
-        public async Task LoadDictionaryFromDisk()
+        public async Task LoadDictionaryFromDiskAsync()
         {
             m_MainDictTrie = new TrieNode();
 

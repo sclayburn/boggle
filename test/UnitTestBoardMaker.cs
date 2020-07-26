@@ -1,16 +1,16 @@
+using BoggleShared;
+using FluentAssertions;
 using System;
 using Xunit;
-using boggleShared;
-using FluentAssertions;
 
-namespace boggleTests
+namespace BoggleTests
 {
     public class UnitTestBoardMaker
     {
         /// <summary>
-        /// Create a random board of sideLength
+        /// Create a random board of sideLength.
         /// </summary>
-        /// <param name="sideLength">The size of a single side of the board</param>
+        /// <param name="sideLength">The size of a single side of the board.</param>
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
@@ -30,9 +30,9 @@ namespace boggleTests
         }
 
         /// <summary>
-        /// Tests invalid board sizes
+        /// Tests invalid board sizes.
         /// </summary>
-        /// <param name="sideLength">The size of a single side of the board</param>
+        /// <param name="sideLength">The size of a single side of the board.</param>
         [Theory]
         [InlineData(-1)]
         [InlineData(0)]

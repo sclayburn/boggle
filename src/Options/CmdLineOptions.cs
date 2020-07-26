@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CommandLine;
+﻿using CommandLine;
 
-namespace boggleApp.Options
+namespace Boggle.Options
 {
     [Verb("game", HelpText = "Generate a new round of the Boggle game")]
     public class CmdLineOptions

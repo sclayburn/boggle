@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace boggleShared
+﻿namespace BoggleShared
 {
     public class TrieNode
     {
@@ -10,7 +6,7 @@ namespace boggleShared
         public TrieNode[] Children { get; set; }
 
         /// <summary>
-        /// Constructor
+        /// Constructor.
         /// </summary>
         public TrieNode()
         {

@@ -1,35 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using boggleApp.Utils;
-using boggleShared;
+﻿using Boggle.Utils;
+using BoggleShared;
 using Serilog;
-using System.Linq;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 
-namespace boggleApp.Game
+namespace Boggle.Game
 {
     public class WordDictAsync : IWordDict
     {
         private TrieNode m_MainDictTrie;
-        
+
         /// <summary>
-        /// Returns the Word Dictionary trie
+        /// Returns the Word Dictionary trie.
         /// </summary>
         /// <returns>Root TrieNode of the prefix search tree that is storing the word dictionary.  Will be null until LoadDictionaryFromDisk is called.</returns>
-        public TrieNode GetWordDictionary() 
+        public TrieNode GetWordDictionary()
         {
             return m_MainDictTrie;
         }
-        
+
         /// <summary>
-        /// Loads the word dictionary from disk using the Async Task system which is multithreaded
+        /// Loads the word dictionary from disk using the Async Task system which is multithreaded.
         /// </summary>
-        /// <returns>async Task for flow control</returns>
-        public async Task LoadDictionaryFromDisk()
+        /// <returns>async Task for flow control.</returns>
+        public async Task LoadDictionaryFromDiskAsync()
         {
-            int alphabetSize = boggleShared.Consts.c_alphabetSize;
+            Stopwatch timer = Stopwatch.StartNew();
+
+            int alphabetSize = BoggleShared.Consts.c_alphabetSize;
 
             m_MainDictTrie = new TrieNode();
             LinkedList<string>[] asyncLists = new LinkedList<string>[alphabetSize];
@@ -37,9 +37,9 @@ namespace boggleApp.Game
 
 
             Log.Information(Utils.Consts.c_logWordDictAsyncLoad);
-            
+
             string[] lines = await File.ReadAllLinesAsync(PathHelper.GetWordDictionaryPath());
-            foreach(string line in lines)
+            foreach (string line in lines)
             {
                 string word = line.ToLower();
                 int index = word[0] - 'a';
@@ -50,31 +50,33 @@ namespace boggleApp.Game
                 asyncLists[index].AddLast(line);
             }
 
-            TaskFactory factory = Task.Factory;
-            for (int i=0; i < alphabetSize; i++)
+            for (int i = 0; i < alphabetSize; i++)
             {
                 int index = i;
-                Task t = factory.StartNew(() => 
+                Task t = new Task(() =>
                 {
                     TrieNode node = new TrieNode();
                     var list = asyncLists[index];
-                    //Early out if we don't have any words that start with this letter
+                    // Early out if we don't have any words that start with this letter
                     if (list == null || list.Count == 0)
                     {
                         return;
                     }
-                    foreach(string word in list)
+                    foreach (string word in list)
                     {
                         Trie.Insert(m_MainDictTrie, word);
                     }
                 });
+                t.Start();
                 runningTasks[i] = t;
             }
 
             Task.WaitAll(runningTasks);
 
+            timer.Stop();
+
             Log.Information(Utils.Consts.c_logWordDictLoadComplete);
-            Log.Information(Utils.Consts.c_logWordDictLoaded, new object[] { lines.Count() });
+            Log.Information(Utils.Consts.c_logWordDictLoaded, lines.Length, timer.ElapsedMilliseconds);
         }
     }
 }

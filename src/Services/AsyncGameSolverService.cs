@@ -16,11 +16,11 @@ namespace Boggle.Services
         private long m_totalOperations;
 
         /// <summary>
-        /// Solves the boggle board using the builtin C# async/task system
+        /// Solves the boggle board using the builtin C# async/task system.
         /// </summary>
-        /// <param name="dict">An IWordDict object that contains the dictionary to use when solving the board</param>
-        /// <param name="board">A Board that is already populated with character spaces</param>
-        public List<string> Solve(IWordDict dict, Board board)
+        /// <param name="dict">An <see cref="IWordDict"/> object that contains the dictionary to use when solving the board.</param>
+        /// <param name="board">A Board that is already populated with character spaces.</param>
+        public IEnumerable<string> Solve(IWordDict dict, Board board)
         {
             m_sideLength = board.SideLength;
             int totalBoardSpaces = m_sideLength * m_sideLength;
@@ -48,7 +48,7 @@ namespace Boggle.Services
                         int alphaIndex = chr - Consts.c_asciiCharCodeOfA;
                         var currentNode = nodeArray[alphaIndex];
 
-                        //Early out if we don't have any words that start with this character
+                        // Early out if we don't have any words that start with this character
                         if (currentNode == null)
                         {
                             return;
@@ -71,7 +71,7 @@ namespace Boggle.Services
                 }
             }
 
-            Log.Information(Utils.Consts.c_logAsyncTasksCreated, new object[] { runningTasks.Length });
+            Log.Information(Utils.Consts.c_logAsyncTasksCreated, runningTasks.Length);
 
             foreach (var task in runningTasks)
             {
@@ -88,15 +88,15 @@ namespace Boggle.Services
         }
 
         /// <summary>
-        /// Gets the total number of iteration operations that were performed solving this board
+        /// Gets the total number of iteration operations that were performed solving this board.
         /// </summary>
-        /// <returns>A long with the total number of operations</returns>
+        /// <returns>A long with the total number of operations.</returns>
         public long GetTotalOperations()
         {
             return m_totalOperations;
         }
 
-        private List<string> GetFoundWords()
+        private IEnumerable<string> GetFoundWords()
         {
             HashSet<string> returnVal = new HashSet<string>();
             foreach (var list in m_foundWords)
@@ -109,21 +109,21 @@ namespace Boggle.Services
                     }
                 }
             }
-            //Not horribly performant but only called once on exit to alphabetically order the found words
-            return returnVal.OrderBy(x => x).ToList();
+            // Not horribly performant but only called once on exit to alphabetically order the found words
+            return returnVal.OrderBy(x => x);
         }
 
         private void RecursiveSearch(TrieNode node, char[] chars, int i, int j, BitArray visited, string wordBuilder, List<string> foundWords, ref long totalOperations)
         {
             totalOperations++;
 
-            //Ensure we are on a valid space
+            // Ensure we are on a valid space
             if (!IsValidSpace(i, j))
             {
                 return;
             }
 
-            //If we found a word, add it
+            // If we found a word, add it
             if (node.IsLeaf)
             {
                 foundWords.Add(wordBuilder);
@@ -131,7 +131,7 @@ namespace Boggle.Services
 
             int index = (i * m_sideLength) + j;
 
-            //Ensure we haven't visited this before
+            // Ensure we haven't visited this before
             if (visited[index])
             {
                 return;
@@ -152,7 +152,7 @@ namespace Boggle.Services
                         continue;
                     }
 
-                    //Check to see if the char on the board exists in this node
+                    // Check to see if the char on the board exists in this node
                     char chr = chars[localIndex];
 
                     int nodeIndex = chr - Consts.c_asciiCharCodeOfA;

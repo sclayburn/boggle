@@ -1,16 +1,11 @@
-﻿using System;
+﻿using BoggleShared;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using boggleShared;
-using System.Linq;
 
-namespace boggleApp.Game
+namespace Boggle.Game
 {
     public interface IGameSolver
     {
-        public List<string> Solve(IWordDict dict, Board board);
+        public IEnumerable<string> Solve(IWordDict dict, Board board);
         public long GetTotalOperations();
     }
 }

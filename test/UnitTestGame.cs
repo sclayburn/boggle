@@ -1,17 +1,16 @@
-using System;
-using Xunit;
-using boggleShared;
+using Boggle.Game;
+using Boggle.Services;
+using BoggleShared;
 using FluentAssertions;
-using boggleApp.Game;
-using boggleApp.Services;
 using System.Collections.Generic;
+using Xunit;
 
-namespace boggleTests
+namespace BoggleTests
 {
     public class UnitTestGame
     {
         /// <summary>
-        /// Tests the singlethreaded game solver with a simple board and known dictionary
+        /// Tests the singlethreaded game solver with a simple board and known dictionary.
         /// </summary>
         [Fact]
         public void TestSimpleDefinedSinglethreadedGame()
@@ -22,7 +21,7 @@ namespace boggleTests
             Board board = maker.GetBoard();
 
             IWordDict dict = new WordDictMock();
-            dict.LoadDictionaryFromDisk();
+            dict.LoadDictionaryFromDiskAsync();
 
             IGameSolver service = new SinglethreadedGameSolverService();
             var foundWords = service.Solve(dict, board);
@@ -31,7 +30,7 @@ namespace boggleTests
         }
 
         /// <summary>
-        /// Tests the async game solver with a simple board and known dictionary
+        /// Tests the async game solver with a simple board and known dictionary.
         /// </summary>
         [Fact]
         public void TestSimpleDefinedAsyncGame()
@@ -42,7 +41,7 @@ namespace boggleTests
             Board board = maker.GetBoard();
 
             IWordDict dict = new WordDictMock();
-            dict.LoadDictionaryFromDisk();
+            dict.LoadDictionaryFromDiskAsync();
 
             IGameSolver service = new AsyncGameSolverService();
             var foundWords = service.Solve(dict, board);
@@ -50,7 +49,7 @@ namespace boggleTests
             ValidateFoundWords(foundWords);
         }
 
-        private void ValidateFoundWords(List<string> foundWords)
+        private void ValidateFoundWords(IEnumerable<string> foundWords)
         {
             foundWords.Should().Contain("abed");
             foundWords.Should().Contain("aero");

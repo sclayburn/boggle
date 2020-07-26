@@ -1,14 +1,13 @@
-using System;
-using Xunit;
-using boggleShared;
+using BoggleShared;
 using FluentAssertions;
+using Xunit;
 
-namespace boggleTests
+namespace BoggleTests
 {
     public class UnitTestTrie
     {
         /// <summary>
-        /// Tests the Trie.Insert method to ensure that the trie is being populated correctly
+        /// Tests the Trie.Insert method to ensure that the trie is being populated correctly.
         /// </summary>
         [Fact]
         public void TestInsertNode()
