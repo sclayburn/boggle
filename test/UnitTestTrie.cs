@@ -18,16 +18,28 @@ namespace BoggleTests
             Trie.Insert(root, "Zebra");
             Trie.Insert(root, "Baker");
 
-            root.Children[0].Should().NotBeNull();
-            root.Children[0].Children['p' - 'a'].Should().NotBeNull();
-            root.Children[0].Children['p' - 'a'].Children['p' - 'a'].Should().NotBeNull();
-            root.Children[0].Children['p' - 'a'].Children['p' - 'a'].Children['l' - 'a'].Should().NotBeNull();
-            root.Children[0].Children['p' - 'a'].Children['p' - 'a'].Children['l' - 'a'].Children['e' - 'a'].Should().NotBeNull();
-            root.Children[0].Children['p' - 'a'].Children['p' - 'a'].Children['l' - 'a'].Children['e' - 'a'].IsLeaf.Should().BeTrue();
-            root.Children[0].Children['p' - 'a'].Children['e' - 'a'].Should().NotBeNull();
-            root.Children[0].Children['p' - 'a'].Children['e' - 'a'].IsLeaf.Should().BeTrue();
-            root.Children[25].Should().NotBeNull();
-            root.Children[1].Should().NotBeNull();
+            var childA = root.Children[0];
+            var childB = root.Children[1];
+            var childZ = root.Children[25];
+            int offsetP = 'p' - Consts.c_asciiCharCodeOfA;
+            int offsetL = 'l' - Consts.c_asciiCharCodeOfA;
+            int offsetE = 'e' - Consts.c_asciiCharCodeOfA;
+            var childFirstP = childA.Children[offsetP];
+            var childSecondP = childFirstP.Children[offsetP];
+            var childThirdL = childSecondP.Children[offsetL];
+            var childFourthE = childThirdL.Children[offsetE];
+            var childThirdE = childFirstP.Children[offsetE];
+
+            childA.Should().NotBeNull();
+            childFirstP.Should().NotBeNull();
+            childSecondP.Should().NotBeNull();
+            childThirdL.Should().NotBeNull();
+            childFourthE.Should().NotBeNull();
+            childFourthE.IsLeaf.Should().BeTrue();
+            childThirdE.Should().NotBeNull();
+            childThirdE.IsLeaf.Should().BeTrue();
+            childB.Should().NotBeNull();
+            childZ.Should().NotBeNull();
         }
     }
 }

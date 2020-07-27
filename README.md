@@ -39,7 +39,7 @@ dotnet test
 ### Run console app - Single threaded
 
 ```bash
-dotnet run --project src game --singlethreaded --sidelength=8
+dotnet run --project src -c Release game --singlethreaded --sidelength=8
 ```
 
 Valid --sidelength are values between 1 and 1024.
@@ -47,7 +47,7 @@ Valid --sidelength are values between 1 and 1024.
 ### Run console app - Async
 
 ```bash
-dotnet run --project src game --async --sidelength=8
+dotnet run --project src -c Release game --async --sidelength=8
 ```
 
 Valid --sidelength are values between 1 and 1024.
