@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Boggle.Services
@@ -14,7 +15,7 @@ namespace Boggle.Services
     /// </summary>
     public class AsyncGameSolverService : IGameSolver
     {
-        private List<string>[] m_foundWords;
+        private ConcurrentQueue<HashSet<string>> m_foundWords;
         private int m_sideLength;
         private long m_totalOperations;
 
@@ -27,7 +28,7 @@ namespace Boggle.Services
         {
             m_sideLength = board.SideLength;
             int totalBoardSpaces = m_sideLength * m_sideLength;
-            m_foundWords = new List<string>[totalBoardSpaces];
+            m_foundWords = new ConcurrentQueue<HashSet<string>>();
             var chars = board.Chars;
             var rootNode = dict.GetWordDictionary();
             var nodeArray = rootNode.Children;
@@ -44,7 +45,6 @@ namespace Boggle.Services
                     int innerI = i;
                     int innerJ = j;
                     int index = (innerI * m_sideLength) + innerJ;
-                    m_foundWords[index] = new List<string>();
                     Task t = new Task(() =>
                     {
                         char chr = chars[index];
@@ -65,7 +65,15 @@ namespace Boggle.Services
                             visited = new BitArray(totalBoardSpaces);
                         }
 
-                        RecursiveSearch(currentNode, chars, innerI, innerJ, visited, str, m_foundWords[index], ref totalOperations[index]);
+                        HashSet<string> foundWords;
+                        if (!m_foundWords.TryDequeue(out foundWords))
+                        {
+                            foundWords = new HashSet<string>();
+                        }
+
+                        RecursiveSearch(currentNode, chars, innerI, innerJ, visited, str, foundWords, ref totalOperations[index]);
+
+                        m_foundWords.Enqueue(foundWords);
 
                         visited.SetAll(false);
                         visitedQueue.Enqueue(visited);
@@ -113,7 +121,7 @@ namespace Boggle.Services
             return returnVal.OrderBy(x => x);
         }
 
-        private void RecursiveSearch(TrieNode node, char[] chars, int i, int j, BitArray visited, string wordBuilder, List<string> foundWords, ref long totalOperations)
+        private void RecursiveSearch(TrieNode node, char[] chars, int i, int j, BitArray visited, string wordBuilder, HashSet<string> foundWords, ref long totalOperations)
         {
             totalOperations++;
 

@@ -2,7 +2,7 @@
   "profiles": {
     "Boggle": {
       "commandName": "Project",
-      "commandLineArgs": "game --sidelength=8 --async --forcewritefoundwords"
+      "commandLineArgs": "game --sidelength=1024 --async"
     }
   }
 }
