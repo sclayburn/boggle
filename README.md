@@ -2,7 +2,7 @@
 
 * Language - **C#**
 * Runtime - **DotNet Core 3.1**
-* Description - **Boggle board solver.**  **Contains both a single threaded and an async implementation.**
+* Description - **Boggle board solver.**  **Contains both a single threaded and an async/multithreaded implementation.**
 
 ## Development & Debugging
 
