@@ -10,6 +10,11 @@ namespace Boggle
 {
     class Program
     {
+        /// <summary>
+        /// Async entrypoint for the application.  
+        /// </summary>
+        /// <param name="args">Commandline arguments</param>
+        /// <returns>0 = Success; 1 = Error.</returns>
         static async Task Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()

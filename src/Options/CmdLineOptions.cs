@@ -2,6 +2,9 @@
 
 namespace Boggle.Options
 {
+    /// <summary>
+    /// Defines the valid commandline options that the CommandLineParser assembly will accept.
+    /// </summary>
     [Verb("game", HelpText = "Generate a new round of the Boggle game")]
     public class CmdLineOptions
     {

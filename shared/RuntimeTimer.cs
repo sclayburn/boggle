@@ -2,6 +2,9 @@
 
 namespace BoggleShared
 {
+    /// <summary>
+    /// Provides centralized runtime timing capabilities and helper functions.
+    /// </summary>
     public static class RuntimeTimer
     {
         private static DateTime m_appStart;

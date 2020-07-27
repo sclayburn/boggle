@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Boggle.Game
 {
+    /// <summary>
+    /// Load the word dictionary from disk and populate a trie data structure with the dictionary using the async/task system built into C#.  Implements the <see cref="IWordDict"/> interface.
+    /// </summary>
     public class WordDictAsync : IWordDict
     {
         private TrieNode m_MainDictTrie;
@@ -15,7 +18,7 @@ namespace Boggle.Game
         /// <summary>
         /// Returns the Word Dictionary trie.
         /// </summary>
-        /// <returns>Root TrieNode of the prefix search tree that is storing the word dictionary.  Will be null until LoadDictionaryFromDisk is called.</returns>
+        /// <returns>Root <see cref="TrieNode"/> of the prefix search tree that is storing the word dictionary.  Will be null until LoadDictionaryFromDisk is called.</returns>
         public TrieNode GetWordDictionary()
         {
             return m_MainDictTrie;

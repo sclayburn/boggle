@@ -4,6 +4,9 @@ using System;
 
 namespace Boggle.Validation
 {
+    /// <summary>
+    /// Ensures that the commandline arguments meet our range specifications.
+    /// </summary>
     public class ValidateCmdLine
     {
         /// <summary>

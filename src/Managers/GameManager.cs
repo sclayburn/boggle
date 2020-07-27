@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace Boggle.Managers
 {
+    /// <summary>
+    /// Is the translation interface between the CommandLineParser assembly and the actual board solver logic.
+    /// </summary>
     public static class GameManager
     {
         private static IWordDict m_wordDict;

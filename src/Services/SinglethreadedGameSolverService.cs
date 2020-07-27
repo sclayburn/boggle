@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace Boggle.Services
 {
+    /// <summary>
+    /// Solves a provided <see cref="Board"/> using the provided <see cref="IWordDict"/>.  Uses a single thread to solve the board.
+    /// </summary>
     public class SinglethreadedGameSolverService : IGameSolver
     {
         private HashSet<string> m_foundWords;

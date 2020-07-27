@@ -1,5 +1,8 @@
 ﻿namespace BoggleShared
 {
+    /// <summary>
+    /// Class that can act on <see cref="TrieNode"/> root nodes.
+    /// </summary>
     public static class Trie
     {
         /// <summary>

@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace Boggle.Game
 {
+    /// <summary>
+    /// Mock of a dictionary for use with our unit tests
+    /// </summary>
     public class WordDictMock : IWordDict
     {
         private TrieNode m_MainDictTrie;

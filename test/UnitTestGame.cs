@@ -8,6 +8,9 @@ using Xunit;
 
 namespace BoggleTests
 {
+    /// <summary>
+    /// Unit tests for the <see cref="AsyncGameSolverService"/> and <see cref="SinglethreadedGameSolverService"/> classes.
+    /// </summary>
     public class UnitTestGame
     {
         /// <summary>

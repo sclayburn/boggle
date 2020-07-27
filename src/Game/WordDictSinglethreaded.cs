@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Boggle.Game
 {
+    /// <summary>
+    /// Load the word dictionary from disk and populate a trie data structure with the dictionary using a single thread.  Implements the <see cref="IWordDict"/> interface.
+    /// </summary>
     public class WordDictSinglethreaded : IWordDict
     {
         private TrieNode m_MainDictTrie;

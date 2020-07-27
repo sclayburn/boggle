@@ -3,6 +3,9 @@ using System.IO;
 
 namespace Boggle.Utils
 {
+    /// <summary>
+    /// Path calculation helper methods.
+    /// </summary>
     public static class PathHelper
     {
         /// <summary>

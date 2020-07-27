@@ -1,5 +1,8 @@
 ﻿namespace BoggleShared
 {
+    /// <summary>
+    /// The individual trie nodes.
+    /// </summary>
     public class TrieNode
     {
         public bool IsLeaf { get; set; }

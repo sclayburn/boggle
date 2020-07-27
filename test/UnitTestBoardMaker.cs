@@ -5,6 +5,9 @@ using Xunit;
 
 namespace BoggleTests
 {
+    /// <summary>
+    /// Unit tests for the <see cref="BoardMaker"/> class.
+    /// </summary>
     public class UnitTestBoardMaker
     {
         /// <summary>

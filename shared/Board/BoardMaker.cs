@@ -3,6 +3,9 @@ using System.Security.Cryptography;
 
 namespace BoggleShared
 {
+    /// <summary>
+    /// Game logic for creating and populating a <see cref="Board"/> of a specified size.
+    /// </summary>
     public class BoardMaker
     {
         private Board m_board;

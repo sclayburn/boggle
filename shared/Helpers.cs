@@ -2,6 +2,9 @@
 
 namespace BoggleShared
 {
+    /// <summary>
+    /// Generic & misc helper functions.
+    /// </summary>
     public static class Helpers
     {
         /// <summary>

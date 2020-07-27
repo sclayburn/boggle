@@ -4,6 +4,9 @@ using Xunit;
 
 namespace BoggleTests
 {
+    /// <summary>
+    /// Unit tests for the <see cref="Trie"/> class.
+    /// </summary>
     public class UnitTestTrie
     {
         /// <summary>

@@ -1,5 +1,8 @@
 ﻿namespace BoggleShared
 {
+    /// <summary>
+    /// The game board poco.
+    /// </summary>
     public class Board
     {
         public int SideLength { get; set; }

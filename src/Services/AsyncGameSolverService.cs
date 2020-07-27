@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Boggle.Services
 {
+    /// <summary>
+    /// Solves a provided <see cref="Board"/> using the provided <see cref="IWordDict"/>.  Uses the async/task system built into C# to solve it with multiple threads.
+    /// </summary>
     public class AsyncGameSolverService : IGameSolver
     {
         private List<string>[] m_foundWords;
