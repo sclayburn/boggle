@@ -8,9 +8,9 @@
         /// <summary>
         /// Constructor.
         /// </summary>
-        public TrieNode()
+        public TrieNode(int initialCapacity = Consts.c_alphabetSize)
         {
-            Children = new TrieNode[Consts.c_alphabetSize];
+            Children = new TrieNode[initialCapacity];
         }
     }
 }
